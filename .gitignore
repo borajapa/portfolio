@@ -10,6 +10,8 @@
 
 # production
 /build
+/dist
+/legacy_backup
 
 # misc
 .DS_Store
