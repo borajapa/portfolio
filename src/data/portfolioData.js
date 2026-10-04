@@ -24,11 +24,10 @@ export const portfolioData = {
       en: "Systems & Development Analyst II at Coopersystem with over 5 years of continuous growth building mission-critical platforms for BB Seguros and MAPFRE. Combining a dual analytical background (Law + Computer Science) with hands-on depth in Java, Spring Boot, Angular, TypeScript, Node.js, and React."
     },
     resumeLink: "/Joao_Henrique_Resume.pdf",
-    email: "joaohenrique.kf@gmail.com",
+    email: "contato@borajapa.com",
     socials: {
       github: "https://github.com/borajapa",
-      linkedin: "https://www.linkedin.com/in/ferreirajoaoh/",
-      instagram: "https://www.instagram.com/joaohkf"
+      linkedin: "https://www.linkedin.com/in/ferreirajoaoh/"
     },
     stats: [
       {

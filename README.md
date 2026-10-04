@@ -91,4 +91,3 @@ portfolio/
 **João Henrique Ferreira (borajapa)**
 - **GitHub**: [@borajapa](https://github.com/borajapa)
 - **LinkedIn**: [João Henrique](https://www.linkedin.com/in/ferreirajoaoh/)
-- **Instagram**: [@joaohkf](https://www.instagram.com/joaohkf)

@@ -10,7 +10,6 @@ import {
   Send, 
   Github, 
   Linkedin, 
-  Instagram, 
   Sparkles,
   ArrowUpRight,
   MessageSquare
@@ -173,19 +172,6 @@ export default function Contact() {
                     <div className="flex items-center gap-3">
                       <Github className="w-4 h-4 text-indigo-400" />
                       <span className="text-xs font-mono">GitHub (@borajapa)</span>
-                    </div>
-                    <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
-
-                  <a
-                    href={portfolioData.profile.socials.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-zinc-300 hover:text-white hover:border-indigo-500/40 hover:bg-zinc-900/60 transition-all group"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Instagram className="w-4 h-4 text-indigo-400" />
-                      <span className="text-xs font-mono">Instagram (@joaohkf)</span>
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </a>
