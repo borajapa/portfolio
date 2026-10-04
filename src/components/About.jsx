@@ -100,6 +100,14 @@ export default function About() {
                   <span className="text-indigo-300">"borajapa"</span>,
                 </div>
                 <div className="pl-4">
+                  <span className="text-zinc-400">currentRole:</span>{" "}
+                  <span className="text-emerald-300">"Analista II @ Coopersystem"</span>,
+                </div>
+                <div className="pl-4">
+                  <span className="text-zinc-400">careerLadder:</span>{" "}
+                  <span className="text-indigo-400">"Estágio ➔ Prog I ➔ Analista I ➔ Analista II"</span>,
+                </div>
+                <div className="pl-4">
                   <span className="text-zinc-400">formation:</span> [
                   <span className="text-amber-300">"Computer Science"</span>,{" "}
                   <span className="text-amber-300">"Law (LL.B.)"</span>],

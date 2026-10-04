@@ -6,9 +6,11 @@ import {
   Briefcase, 
   Calendar, 
   MapPin, 
-  CheckCircle, 
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  TrendingUp,
+  Award,
+  Layers
 } from 'lucide-react';
 
 export default function Experience() {
@@ -35,6 +37,7 @@ export default function Experience() {
         {/* Timeline Container */}
         <div className="relative border-l border-zinc-800 ml-4 sm:ml-8 pl-6 sm:pl-10 space-y-12">
           {portfolioData.experiences.map((exp, index) => {
+            const hasProgression = Boolean(exp.progression && exp.progression.length > 0);
             const isCurrent = exp.period[lang].includes('Present') || exp.period[lang].includes('Presente');
 
             return (
@@ -56,55 +59,116 @@ export default function Experience() {
                 />
 
                 {/* Main Card */}
-                <div className="glass-panel p-6 sm:p-7 rounded-2xl glass-panel-hover border-zinc-800/80">
+                <div className="glass-panel p-6 sm:p-8 rounded-2xl glass-panel-hover border-zinc-800/80">
                   
-                  {/* Top Bar: Company, Role, Period */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                  {/* Top Bar */}
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6 pb-6 border-b border-zinc-800/80">
                     <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
-                          {exp.role[lang]}
-                        </h3>
-                        {isCurrent && (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            {t.experience.present}
-                          </span>
-                        )}
-                      </div>
-                      <div className="text-sm font-semibold text-indigo-400 flex items-center gap-2">
-                        <Briefcase className="w-3.5 h-3.5" />
-                        <span>{exp.company}</span>
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+                          <Briefcase className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                              {exp.company}
+                            </h3>
+                            {exp.totalDuration && (
+                              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                                {exp.totalDuration[lang]}
+                              </span>
+                            )}
+                          </div>
+                          {exp.project && (
+                            <div className="text-xs font-mono text-zinc-400 mt-0.5">
+                              Projeto: <span className="text-indigo-400 font-semibold">{exp.project}</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
-                      <span className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800">
-                        <Calendar className="w-3.5 h-3.5 text-zinc-400" />
+                    <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-2 text-xs font-mono text-zinc-400">
+                      <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 border border-zinc-800 text-zinc-300">
+                        <Calendar className="w-3.5 h-3.5 text-indigo-400" />
                         {exp.period[lang]}
+                      </span>
+                      <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-950/60 border border-zinc-800/60 text-zinc-400 text-[11px]">
+                        <MapPin className="w-3 h-3 text-zinc-500" />
+                        {typeof exp.location === 'object' ? exp.location[lang] : exp.location}
                       </span>
                     </div>
                   </div>
 
-                  {/* Main Description */}
-                  <p className="text-zinc-300 text-sm leading-relaxed mb-5">
+                  {/* Description summary */}
+                  <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-6">
                     {exp.description[lang]}
                   </p>
 
-                  {/* Key Highlights / Bullets */}
-                  <div className="mb-5 space-y-2">
-                    <div className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">
-                      {t.experience.keyHighlights}
+                  {/* Career Progression Ladder (If available) */}
+                  {hasProgression && (
+                    <div className="mb-6 space-y-3">
+                      <div className="flex items-center gap-2 text-xs font-mono font-semibold text-indigo-400 uppercase tracking-wider mb-3">
+                        <TrendingUp className="w-4 h-4" />
+                        <span>Progressão de Carreira na Coopersystem</span>
+                      </div>
+
+                      <div className="relative border-l-2 border-indigo-500/30 ml-3 pl-5 space-y-6">
+                        {exp.progression.map((step, sIdx) => (
+                          <div key={sIdx} className="relative group/step">
+                            {/* Sub-node */}
+                            <div 
+                              className={`absolute -left-[27px] top-1 w-3 h-3 rounded-full border-2 ${
+                                step.current 
+                                  ? 'bg-emerald-400 border-emerald-300 shadow-[0_0_8px_rgba(52,211,153,0.8)]' 
+                                  : 'bg-zinc-800 border-zinc-600'
+                              }`}
+                            />
+
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+                              <div className="flex items-center gap-2">
+                                <h4 className="text-sm sm:text-base font-bold text-white">
+                                  {step.role[lang]}
+                                </h4>
+                                <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full border ${
+                                  step.current 
+                                    ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 font-semibold' 
+                                    : 'bg-zinc-900 text-zinc-400 border-zinc-800'
+                                }`}>
+                                  {step.badge[lang]}
+                                </span>
+                              </div>
+
+                              <span className="text-xs font-mono text-zinc-400">
+                                {step.period[lang]}
+                              </span>
+                            </div>
+
+                            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mt-1">
+                              {step.details[lang]}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <ul className="space-y-1.5">
-                      {exp.highlights[lang].map((item, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
-                          <ChevronRight className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  )}
+
+                  {/* Highlights (For items without progression) */}
+                  {!hasProgression && exp.highlights && (
+                    <div className="mb-6 space-y-2">
+                      <div className="text-xs font-mono font-semibold text-zinc-400 uppercase tracking-wider">
+                        {t.experience.keyHighlights}
+                      </div>
+                      <ul className="space-y-1.5">
+                        {exp.highlights[lang].map((item, hIdx) => (
+                          <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
+                            <ChevronRight className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
                   {/* Tech stack badges */}
                   <div className="pt-4 border-t border-zinc-800/80">
